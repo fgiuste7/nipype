@@ -2149,6 +2149,9 @@ class RandomiseInputSpec(FSLCommandInputSpec):
     p_vec_n_dist_files = traits.Bool(
         desc='output permutation vector and null distribution text files',
         argstr='-P')
+    t_null_dist_files = traits.Bool(
+        desc='output null distribution text files',
+        argstr='-N')
     num_perm = traits.Int(
         argstr='-n %d',
         desc='number of permutations (default 5000, set to 0 for exhaustive)')
@@ -2188,6 +2191,9 @@ class RandomiseOutputSpec(TraitedSpec):
     f_corrected_p_files = traits.List(
         File(exists=True),
         desc='f contrast FWE (Family-wise error) corrected p values files')
+    t_vox_test_files = traits.List(
+        File(exists=True),
+        desc='max image tStats for permutations')
 
 
 class Randomise(FSLCommand):
@@ -2236,6 +2242,9 @@ class Randomise(FSLCommand):
                                                         prefix)))
             outputs['f_corrected_p_files'] = glob(
                 self._gen_fname('%s_%s_corrp_fstat*.nii' %
+                                (self.inputs.base_name, prefix)))
+            outputs['t_vox_test_files'] = glob(
+                self._gen_fname('%s_%s_vox_corrp_tstat*.txt' %
                                 (self.inputs.base_name, prefix)))
         return outputs
 
