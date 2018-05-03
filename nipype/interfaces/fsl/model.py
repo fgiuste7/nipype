@@ -2147,7 +2147,7 @@ class RandomiseInputSpec(FSLCommandInputSpec):
     raw_stats_imgs = traits.Bool(
         desc='output raw ( unpermuted ) statistic images', argstr='-R')
     p_vec_n_dist_files = traits.Bool(
-        desc='output permutation vector and null distribution text files',
+        desc='output permutation vector',
         argstr='-P')
     t_null_dist_files = traits.Bool(
         desc='output null distribution text files',
@@ -2182,7 +2182,7 @@ class RandomiseOutputSpec(TraitedSpec):
     fstat_files = traits.List(
         File(exists=True), desc='f contrast raw statistic')
     t_p_files = traits.List(
-        File(exists=True), desc='f contrast uncorrected p values files')
+        File(exists=True), desc='t contrast uncorrected p values files')
     f_p_files = traits.List(
         File(exists=True), desc='f contrast uncorrected p values files')
     t_corrected_p_files = traits.List(
@@ -2194,7 +2194,6 @@ class RandomiseOutputSpec(TraitedSpec):
     t_vox_test_files = traits.List(
         File(exists=True),
         desc='max image tStats for permutations')
-
 
 class Randomise(FSLCommand):
     """FSL Randomise: feeds the 4D projected FA data into GLM
